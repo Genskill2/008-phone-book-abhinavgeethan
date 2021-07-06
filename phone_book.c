@@ -196,7 +196,7 @@ void list(FILE *db_file) {
     p=p->next;
     count++;
   }
-  printf("Total Count: %d\n",count);
+  printf("Total entries: %d\n",count);
   free_entries(base);
 }
 
@@ -208,7 +208,6 @@ int delete(FILE *db_file, char *name) {
   entry *del = NULL ; /* Node to be deleted */
   int deleted = 0;
   while (p!=NULL) {
-    printf("%s",p->name);
     if (strcmp(p->name, name) == 0) {
       if (prev!=NULL){
       	/*printf("Deleting std. node");*/
