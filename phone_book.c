@@ -105,7 +105,10 @@ FILE *open_db_file() {
   
 void free_entries(entry *p) {
   /* TBD */
-  free(p);
+  while (p!=NULL){
+  	free(p);
+  	p=p->next;
+  }
   /*printf("Memory is not being freed. This needs to be fixed!\n");*/  
 }
 
@@ -246,15 +249,14 @@ int delete(FILE *db_file, char *name) {
 
 int search(FILE *db_file, char *name) {
   entry *p = load_entries(db_file);
-  int ret;
+  entry *base = p;
+  int ret=-1;
   while (p!=NULL) {
     if (strcmp(p->name, name) == 0) {
       ret=atoi(p->phone);
-      free_entries(p);
-      return ret;
     }
     p=p->next;
   }
-  free_entries(p);
-  return -1;
+  free_entries(base);
+  return ret;
 }
